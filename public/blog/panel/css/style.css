@@ -1876,3 +1876,8 @@ span.tagRemove:hover {
 .notification__box .title__noti{
     padding: 15px 0;
 }
+.error{
+    text-align: right;
+    color: red;
+    margin-bottom: 1rem;
+}

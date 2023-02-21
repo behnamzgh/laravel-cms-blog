@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Panel\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,8 @@ Route::get('/karbar', fn() => 'profile')->name('karbar');
 Route::get('/dashboard', function () {
     return view('panel.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::resource('panel/users',UserController::class)->except(['show']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

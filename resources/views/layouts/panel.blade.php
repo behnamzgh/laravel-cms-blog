@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0;">
-    <title>داشبورد مدیریت {{$title ?? ''}}</title>
+    <title>داشبورد {{$title ?? ''}}</title>
     <link rel="stylesheet" href="{{asset('blog/panel/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('blog/panel/css/responsive_991.css')}}" media="(max-width:991px)">
     <link rel="stylesheet" href="{{asset('blog/panel/css/responsive_768.css')}}" media="(max-width:768px)">
@@ -26,8 +26,8 @@
         </div>
 
         <ul>
-            <li class="item-li i-dashboard is-active"><a href="index.html">پیشخوان</a></li>
-            <li class="item-li i-users"><a href="users.html"> کاربران</a></li>
+            <li class="item-li i-dashboard @if(request()->is('dashboard')) is-active @endif"><a href="{{route('dashboard')}}">پیشخوان</a></li>
+            <li class="item-li i-users @if(request()->is('panel/users') || request()->is('panel/users/*')) is-active @endif"><a href="{{route('users.index')}}"> کاربران</a></li>
             <li class="item-li i-categories"><a href="categories.html">دسته بندی ها</a></li>
             <li class="item-li i-articles"><a href="articles.html">مقالات</a></li>
             <li class="item-li i-comments"><a href="comments.html"> نظرات</a></li>

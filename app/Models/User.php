@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Hekmatinasser\Verta\Verta;
 
 class User extends Authenticatable
 {
@@ -22,6 +23,7 @@ class User extends Authenticatable
         'phone',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -49,5 +51,15 @@ class User extends Authenticatable
         if($this->role === 'user') return 'عادی';
         if($this->role === 'author') return 'نویسنده';
         if($this->role === 'admin') return 'مدیر';
+    }
+
+    // function tabdil tarikh miladi b jalali
+    public function jalali_created_at()
+    {
+        return verta($this->created_at)->format('Y/m/d');
+    }
+    public function jalali_updated_at()
+    {
+        return verta($this->updated_at)->format('Y/m/d');
     }
 }
