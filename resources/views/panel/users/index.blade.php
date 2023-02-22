@@ -42,8 +42,23 @@
                             <td>{{$user->jalali_created_at()}}</td>
                             <td>{{$user->jalali_updated_at()}}</td>
                             <td>
-                                <a href="" class="item-delete mlg-15" title="حذف"></a>
+
+                                {{-- in if baraye inke faghat admin betone tavanaii delete dashte bashe va --}}
+                                {{-- karbari k login karde natone khodesh ro delete kone --}}
+                                @if(auth()->user()->role === 'admin' && auth()->user()->id !== $user->id )
+
+                                {{-- 2ta meghdar ba onlick pass midim yekish event k hamon click karbar hast --}}
+                                {{-- dovomi id user k ersal mishe b function deleteUser on paiin --}}
+                                <a href="" class="item-delete mlg-15" title="حذف" onclick="deleteUser(event,{{$user->id}})"></a>
+                                @endif
+
                                 <a href="{{ route('users.edit', $user->id) }}" class="item-edit " title="ویرایش"></a>
+
+                                {{-- inja va on paiin agar to id {{$user->id}} ro nazarim modam tekrari mishe va karbar ro tashkhis nemide --}}
+                                <form action="{{route('users.destroy', $user->id)}}" method="post" id="delete-user-{{$user->id}}">
+                                    @csrf
+                                    @method('delete')
+                                </form>
                             </td>
                         </tr>
                     @endforeach
@@ -51,4 +66,12 @@
             </table>
         </div>
     </div>
+    <x-slot name="scripts">
+        <script>
+            function deleteUser(event, id){
+                event.preventDefault()
+                document.getElementById('delete-user-' + id).submit()
+            }
+        </script>
+    </x-slot>
 </x-panel-layout>

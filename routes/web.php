@@ -19,7 +19,8 @@ Route::get('/dashboard', function () {
     return view('panel.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('panel/users',UserController::class)->except(['show']);
+// middlware auth baraye inke faghat karbarani k login bashand betonan varede masire panel/users beshan
+Route::middleware('auth')->resource('panel/users',UserController::class)->except(['show']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

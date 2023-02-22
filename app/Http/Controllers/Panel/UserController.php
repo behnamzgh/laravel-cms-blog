@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
+// use Illuminate\Validation\Rule;
+use App\Http\Requests\Panel\User\CreateUserRequest;
+use App\Http\Requests\Panel\User\UpdateUserRequest;
 
 class UserController extends Controller
 {
@@ -21,14 +23,19 @@ class UserController extends Controller
         return \view('panel.users.create');
     }
 
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
-        // 1.validate roye mohtavaye ersal shode az form
-        $request->validate([
-            'name' => ['required', 'max:255', 'string'],
-            'email' => ['required', 'max:255', 'email', 'unique:users'],
-            'phone' => ['required', 'max:255', 'string', 'unique:users'],
-        ]);
+        // 1.1 validate dakhele controller ba Request
+        // $request->validate([
+        //     'name' => ['required', 'max:255', 'string'],
+        //     'email' => ['required', 'max:255', 'email', 'unique:users'],
+        //     'phone' => ['required', 'max:255', 'string', 'unique:users'],
+        // ]);
+
+        // or
+
+        // 1.2 validate ba requesti k khodemon sakhtim va dakhele function farakhani kardim
+
         // 2.ijad yek araye az data daryafti az form
         $data = $request->only(['name','email','phone','role']);
         // 3.hash kardan kalame 'password' va ezafe kardan in kalame b araye $data
@@ -45,14 +52,18 @@ class UserController extends Controller
         return \view('panel.users.edit', \compact('user'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        // 1. validation
-        $request->validate([
-            'name' => ['required', 'max:255', 'string'],
-            'email' => ['required', 'max:255', 'email', Rule::unique('users')->ignore($user->id)],
-            'phone' => ['required', 'max:255', 'string', Rule::unique('users')->ignore($user->id)],
-        ]);
+        // 1.1
+        // $request->validate([
+        //     'name' => ['required', 'max:255', 'string'],
+        //     'email' => ['required', 'max:255', 'email', Rule::unique('users')->ignore($user->id)],
+        //     'phone' => ['required', 'max:255', 'string', Rule::unique('users')->ignore($user->id)],
+        // ]);
+
+        // or
+
+        // 1.2 validate ba requesti k khodemon sakhtim va dakhele function farakhani kardim
 
         // 2. update
         $user->update(
@@ -63,8 +74,9 @@ class UserController extends Controller
         return \redirect()->route('users.index');
     }
 
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return \back();
     }
 }
