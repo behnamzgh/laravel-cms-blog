@@ -64,6 +64,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{$users->links()}}
         </div>
     </div>
     <x-slot name="scripts">
