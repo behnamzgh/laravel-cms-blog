@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('blog/panel/css/responsive_991.css') }}" media="(max-width:991px)">
     <link rel="stylesheet" href="{{ asset('blog/panel/css/responsive_768.css') }}" media="(max-width:768px)">
     <link rel="stylesheet" href="{{ asset('blog/panel/css/font.css') }}">
+    {{ $links }}
 </head>
 
 <body>
