@@ -31,7 +31,7 @@
                         <p class="error">{{ $message }}</p>
                     @enderror
 
-                    <select name="role">
+                    <select class="select" name="role">
                         <option value="user" @php if($user->role === 'user') echo('selected') @endphp >کاربر عادی</option>
                         <option value="author" @php if($user->role === 'author') echo('selected') @endphp >نویسنده</option>
                         <option value="admin" @php if($user->role === 'admin') echo('selected') @endphp >مدیر</option>
