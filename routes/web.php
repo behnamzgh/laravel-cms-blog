@@ -13,14 +13,14 @@ Route::get('/post/{id}', function () {
     return view('post');
 })->name('post.show');
 
-Route::get('/karbar', fn() => 'profile')->name('karbar');
+Route::middleware('auth')->get('/karbar', fn() => 'profile')->name('karbar');
 
 Route::get('/dashboard', function () {
     return view('panel.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // middlware auth baraye inke faghat karbarani k login bashand betonan varede masire panel/users beshan
-Route::middleware('auth')->resource('panel/users',UserController::class)->except(['show']);
+Route::middleware(['auth', 'IsAdmin'])->resource('panel/users',UserController::class)->except(['show']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
