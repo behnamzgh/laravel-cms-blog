@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('blog/panel/css/responsive_991.css') }}" media="(max-width:991px)">
     <link rel="stylesheet" href="{{ asset('blog/panel/css/responsive_768.css') }}" media="(max-width:768px)">
     <link rel="stylesheet" href="{{ asset('blog/panel/css/font.css') }}">
-    {{ $links }}
+    {{ $links ?? '' }}
 </head>
 
 <body>
@@ -54,9 +54,23 @@
         </div>
         {{ $slot }}
     </div>
+
+    {{-- sweetalert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{-- if baraye inke agar sessioni vojod dasht in tike ejra beshe baraye namayesh payam --}}
+    @if (Session::has('status'))
+        <script>
+            Swal.fire({
+                title: 'همه چی مرتبه...',
+                text: '{{ session('status') }}',
+                icon: 'success',
+                confirmButtonText: 'تایید'
+            })
+        </script>
+    @endif
+    {{ $scripts ?? '' }}
     <script src="{{ asset('blog/panel/js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ asset('blog/panel/js/js.js') }}"></script>
-    {{ $scripts ?? '' }}
 </body>
 
 </html>
