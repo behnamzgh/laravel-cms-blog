@@ -30,7 +30,7 @@
                         <p class="error">{{ $message }}</p>
                     @enderror
 
-                    <select name="role">
+                    <select class="select" name="role">
                         <option value="user" selected>کاربر عادی</option>
                         <option value="author">نویسنده</option>
                         <option value="admin">مدیر</option>

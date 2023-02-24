@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::paginate(3);
+        $users = User::paginate();
         return \view('panel.users.index', \compact('users'));
     }
 
@@ -31,18 +31,18 @@ class UserController extends Controller
         //     'email' => ['required', 'max:255', 'email', 'unique:users'],
         //     'phone' => ['required', 'max:255', 'string', 'unique:users'],
         // ]);
-
         // or
-
         // 1.2 validate ba requesti k khodemon sakhtim va dakhele function farakhani kardim
 
         // 2.ijad yek araye az data daryafti az form
-        $data = $request->only(['name','email','phone','role']);
+        $data = $request->only(['name', 'email', 'phone', 'role']);
         // 3.hash kardan kalame 'password' va ezafe kardan in kalame b araye $data
         $data['password'] = Hash::make('password');
         // 4.ezafe kardan $data b database ba estefade az modele User
         User::create($data);
-        // 5.redirect b safhe namayesh karbaran
+        // 5.session baraye namayesh payam b karbar
+        session()->flash('status', 'کاربر به درستی ایجاد شد.');
+        // 6.redirect b safhe namayesh karbaran
         return \redirect()->route('users.index');
     }
 
@@ -60,23 +60,23 @@ class UserController extends Controller
         //     'email' => ['required', 'max:255', 'email', Rule::unique('users')->ignore($user->id)],
         //     'phone' => ['required', 'max:255', 'string', Rule::unique('users')->ignore($user->id)],
         // ]);
-
         // or
+        // 1.2validate ba requesti k khodemon sakhtim va dakhele function farakhani kardim
 
-        // 1.2 validate ba requesti k khodemon sakhtim va dakhele function farakhani kardim
-
-        // 2. update
+        // 2.update
         $user->update(
-            $request->only(['name','email','phone','role'])
+            $request->only(['name', 'email', 'phone', 'role'])
         );
-
-        // 3. redirect
+        // 3.session baraye namayesh vaziat b karbar
+        session()->flash('status', 'کاربر به درستی ویرایش شد.');
+        // 3.redirect
         return \redirect()->route('users.index');
     }
 
     public function destroy(User $user)
     {
         $user->delete();
+        session()->flash('status', 'حذف کاربر با موفقیت انجام شد.');
         return \back();
     }
 }
