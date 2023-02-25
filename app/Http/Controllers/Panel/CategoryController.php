@@ -10,12 +10,31 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return \view('panel.categories.index');
+        $categories = Category::paginate();
+        $parentCategories = Category::where('category_id', null)->get();
+        // \dd($parentCategories);
+        return \view('panel.categories.index', \compact('categories', 'parentCategories'));
     }
 
     public function store(Request $request)
     {
-        //
+        // 1.validate
+        $request->validate([
+            'name' => ['required', 'max:255'],
+            'slug' => ['required', 'max:255', 'unique:categories'],
+            'category_id' => ['nullable', 'exists:categories,id']
+        ]);
+
+        // 2.save
+        Category::create(
+            $request->only(['name', 'slug', 'category_id'])
+        );
+
+        // 3.session
+        \session()->flash('status', 'دسته بندی ذخیره شد');
+
+        // 4.return
+        return \back();
     }
 
     public function edit(Category $category)
