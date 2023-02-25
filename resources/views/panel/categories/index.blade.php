@@ -31,14 +31,21 @@
                                     <td>{{ $category->slug }}</td>
                                     <td>{{ $category->getParentName() }}</td>
                                     <td>
-                                        <a href="" class="item-delete mlg-15" title="حذف"></a>
-                                        <a href="edit-category.html" class="item-edit " title="ویرایش"></a>
+
+                                        {{-- delete category --}}
+                                        <a href="" class="item-delete mlg-15" title="حذف" onclick="deleteCategory(event, {{ $category->id }})"></a>
+                                        <a href="{{route('categories.edit', $category->id)}}" class="item-edit " title="ویرایش"></a>
+                                        <form action="{{ route('categories.destroy', $category->id) }}" method="post" id="delete-category-{{ $category->id }}">
+                                            @csrf
+                                            @method('delete')
+                                        </form>
+
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    {{$categories->links()}}
+                    {{ $categories->links() }}
                 </div>
             </div>
             <div class="col-4 bg-white">
@@ -70,4 +77,26 @@
             </div>
         </div>
     </div>
+
+    <x-slot name="scripts">
+        <script>
+            function deleteCategory(event, id) {
+                event.preventDefault();
+                Swal.fire({
+                    title: 'آیا مطمئن هستید؟',
+                    text: "بعد از حذف قادر به بازگردانی نیستید...",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'حذف',
+                    cancelButtonText: 'پشیمون شدم'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('delete-category-' + id).submit();
+                    }
+                })
+            }
+        </script>
+    </x-slot>
 </x-panel-layout>
