@@ -48,15 +48,13 @@
                                 @if (auth()->user()->role === 'admin' && auth()->user()->id !== $user->id)
                                     {{-- 2ta meghdar ba onlick pass midim yekish event k hamon click karbar hast --}}
                                     {{-- dovomi id user k ersal mishe b function deleteUser on paiin --}}
-                                    <a href="" class="item-delete mlg-15" title="حذف"
-                                        onclick="deleteUser(event,{{ $user->id }})"></a>
+                                    <a href="" class="item-delete mlg-15" title="حذف" onclick="deleteUser(event, {{ $user->id }})"></a>
                                 @endif
 
                                 <a href="{{ route('users.edit', $user->id) }}" class="item-edit " title="ویرایش"></a>
 
                                 {{-- inja va on paiin agar to id {{$user->id}} ro nazarim modam tekrari mishe va karbar ro tashkhis nemide --}}
-                                <form action="{{ route('users.destroy', $user->id) }}" method="post"
-                                    id="delete-user-{{ $user->id }}">
+                                <form action="{{ route('users.destroy', $user->id) }}" method="post" id="delete-user-{{ $user->id }}">
                                     @csrf
                                     @method('delete')
                                 </form>
