@@ -19,6 +19,8 @@ return array(
     'App\\Http\\Controllers\\Auth\\VerifyEmailController' => $baseDir . '/app/Http/Controllers/Auth/VerifyEmailController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\Panel\\CategoryController' => $baseDir . '/app/Http/Controllers/Panel/CategoryController.php',
+    'App\\Http\\Controllers\\Panel\\EditorUploadController' => $baseDir . '/app/Http/Controllers/Panel/EditorUploadController.php',
+    'App\\Http\\Controllers\\Panel\\PostController' => $baseDir . '/app/Http/Controllers/Panel/PostController.php',
     'App\\Http\\Controllers\\Panel\\UserController' => $baseDir . '/app/Http/Controllers/Panel/UserController.php',
     'App\\Http\\Controllers\\ProfileController' => $baseDir . '/app/Http/Controllers/ProfileController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
