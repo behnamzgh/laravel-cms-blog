@@ -1,3 +1,5 @@
 node_modules
 storage/framework/sessions/*
 .vscode
+public/images/postImages
+public/images/posts
