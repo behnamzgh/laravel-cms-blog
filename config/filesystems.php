@@ -44,6 +44,17 @@ return [
             'throw' => false,
         ],
 
+        // ye copy az balaii ba esme delkhah bejaye storage_path az public_path estefade mikonim
+        // k to folder public zakhire kone va url ro ham / khali mizarim va bad esme public_files
+        // ro toye helper storeAs('images/postImages', $file_name, 'public_files') seda mikonim
+        'public_files' => [
+            'driver' => 'local',
+            'root' => public_path(),
+            'url' => env('APP_URL').'/',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
