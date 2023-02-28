@@ -16,8 +16,8 @@
                 <form action="{{ route('posts.store') }}" method="post" class="padding-30" enctype="multipart/form-data">
                     @csrf
                     {{-- title --}}
-                    <input type="text" name="name" class="text" placeholder="عنوان مقاله">
-                    @error('name')
+                    <input type="text" name="title" class="text" placeholder="عنوان مقاله">
+                    @error('title')
                         <p class="error">{{ $message }}</p>
                     @enderror
 
@@ -36,12 +36,12 @@
                     <div class="file-upload">
                         <div class="i-file-upload">
                             <span>آپلود بنر دوره</span>
-                            <input type="file" name="image" class="file-upload" id="files" name="files" />
+                            <input type="file" name="banner" class="file-upload" id="files" name="files" />
                         </div>
                         <span class="filesize"></span>
                         <span class="selectedFiles">فایلی انتخاب نشده است</span>
                     </div>
-                    @error('image')
+                    @error('banner')
                         <p class="error">{{ $message }}</p>
                     @enderror
 
