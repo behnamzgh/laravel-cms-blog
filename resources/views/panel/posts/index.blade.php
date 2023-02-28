@@ -4,15 +4,15 @@
     </x-slot>
     <div class="breadcrumb">
         <ul>
-            <li><a href="{{route('dashboard')}}">پیشخوان</a></li>
-            <li><a href="{{route('posts.index')}}" class="is-active">مقالات</a></li>
+            <li><a href="{{ route('dashboard') }}">پیشخوان</a></li>
+            <li><a href="{{ route('posts.index') }}" class="is-active">مقالات</a></li>
         </ul>
     </div>
     <div class="main-content">
         <div class="tab__box">
             <div class="tab__items">
-                <a class="tab__item is-active" href="{{route('posts.index')}}">لیست مقالات</a>
-                <a class="tab__item " href="{{route('posts.create')}}">ایجاد مقاله جدید</a>
+                <a class="tab__item is-active" href="{{ route('posts.index') }}">لیست مقالات</a>
+                <a class="tab__item " href="{{ route('posts.create') }}">ایجاد مقاله جدید</a>
             </div>
         </div>
         <div class="bg-white padding-20">
@@ -38,26 +38,54 @@
                         <th>شناسه</th>
                         <th>عنوان</th>
                         <th>نویسنده</th>
-                        <th>متن</th>
                         <th>تاریخ ایجاد</th>
+                        <th>تاریخ ویرایش</th>
                         <th>عملیات</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr role="row" class="">
-                        <td><a href="">1</a></td>
-                        <td><a href="">فریم ورک لاراول چیست</a></td>
-                        <td>توفیق حمزئی</td>
-                        <td>فریم ورک لاراول یکی از فریم ورک های محبوب ...</td>
-                        <td>1399/11/11</td>
-                        <td>
-                            <a href="" class="item-delete mlg-15" title="حذف"></a>
-                            <a href="" target="_blank" class="item-eye mlg-15" title="مشاهده"></a>
-                            <a href="{{route('posts.edit', 1)}}" class="item-edit" title="ویرایش"></a>
-                        </td>
-                    </tr>
-                </tbody>
+                @foreach ($posts as $post)
+                    <tbody>
+                        <tr role="row" class="">
+                            <td>{{ $post->id }}</td>
+                            <td>{{ $post->title }}</td>
+                            <td>{{ $post->user->name }}</td>
+                            <td>{{ $post->jalali_created_at() }}</td>
+                            <td>{{ $post->jalali_updated_at() }}</td>
+                            <td>
+                                <a href="" onclick="deletePost(event, {{ $post->id }})" class="item-delete mlg-15" title="حذف"></a>
+                                <a href="" target="_blank" class="item-eye mlg-15" title="مشاهده"></a>
+                                <a href="{{ route('posts.edit', $post->id) }}" class="item-edit" title="ویرایش"></a>
+                                <form action="{{ route('posts.destroy', $post->id) }}" method="post" id="delete-post-{{ $post->id }}">
+                                    @csrf
+                                    @method('delete')
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                @endforeach
             </table>
+            {{ $posts->links() }}
         </div>
     </div>
+    <x-slot name="scripts">
+        <script>
+            function deletePost(event, id){
+                event.preventDefault();
+                Swal.fire({
+                    title: 'آیا مطمئن هستید؟',
+                    text: "بعد از حذف قادر به بازگردانی نیستید...",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'حذف',
+                    cancelButtonText: 'پشیمون شدم'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('delete-post-' + id).submit();
+                    }
+                })
+            }
+        </script>
+    </x-slot>
 </x-panel-layout>
