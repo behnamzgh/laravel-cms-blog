@@ -525,7 +525,7 @@ abstract class Factory
     /**
      * Add a new sequenced state transformation to the model definition.
      *
-     * @param  mixed  ...$sequence
+     * @param  array  ...$sequence
      * @return static
      */
     public function sequence(...$sequence)

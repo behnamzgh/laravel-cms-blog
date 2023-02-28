@@ -95,7 +95,7 @@ class InstallCommand extends Command
     /**
      * Install Breeze's tests.
      *
-     * @return bool
+     * @return void
      */
     protected function installTests()
     {
@@ -104,11 +104,7 @@ class InstallCommand extends Command
         $stubStack = $this->argument('stack') === 'api' ? 'api' : 'default';
 
         if ($this->option('pest')) {
-            $this->removeComposerPackages(['nunomaduro/collision', 'phpunit/phpunit'], true);
-
-            if (! $this->requireComposerPackages(['nunomaduro/collision:^6.4', 'pestphp/pest:^1.22', 'pestphp/pest-plugin-laravel:^1.2'], true)) {
-                return false;
-            }
+            $this->requireComposerPackages('pestphp/pest:^1.16', 'pestphp/pest-plugin-laravel:^1.1');
 
             (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/'.$stubStack.'/pest-tests/Feature', base_path('tests/Feature'));
             (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/'.$stubStack.'/pest-tests/Unit', base_path('tests/Unit'));
@@ -116,8 +112,6 @@ class InstallCommand extends Command
         } else {
             (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/'.$stubStack.'/tests/Feature', base_path('tests/Feature'));
         }
-
-        return true;
     }
 
     /**
@@ -153,11 +147,10 @@ class InstallCommand extends Command
     /**
      * Installs the given Composer Packages into the application.
      *
-     * @param  array  $packages
-     * @param  bool  $asDev
+     * @param  mixed  $packages
      * @return bool
      */
-    protected function requireComposerPackages(array $packages, $asDev = false)
+    protected function requireComposerPackages($packages)
     {
         $composer = $this->option('composer');
 
@@ -167,43 +160,14 @@ class InstallCommand extends Command
 
         $command = array_merge(
             $command ?? ['composer', 'require'],
-            $packages,
-            $asDev ? ['--dev'] : [],
+            is_array($packages) ? $packages : func_get_args()
         );
 
-        return (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
+        return ! (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
             ->setTimeout(null)
             ->run(function ($type, $output) {
                 $this->output->write($output);
-            }) === 0;
-    }
-
-    /**
-     * Removes the given Composer Packages from the application.
-     *
-     * @param  array  $packages
-     * @param  bool  $asDev
-     * @return bool
-     */
-    protected function removeComposerPackages(array $packages, $asDev = false)
-    {
-        $composer = $this->option('composer');
-
-        if ($composer !== 'global') {
-            $command = ['php', $composer, 'remove'];
-        }
-
-        $command = array_merge(
-            $command ?? ['composer', 'remove'],
-            $packages,
-            $asDev ? ['--dev'] : [],
-        );
-
-        return (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
-            ->setTimeout(null)
-            ->run(function ($type, $output) {
-                $this->output->write($output);
-            }) === 0;
+            });
     }
 
     /**
