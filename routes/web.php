@@ -3,6 +3,7 @@
 use App\Http\Controllers\Panel\CategoryController;
 use App\Http\Controllers\Panel\UserController;
 use App\Http\Controllers\Panel\PostController;
+use App\Http\Controllers\Panel\EditorUploadController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,8 @@ Route::middleware(['auth', 'IsAdmin'])->prefix('/panel')->group(function () {
     Route::resource('/categories', CategoryController::class)->except(['show', 'create']);
     Route::resource('/posts', PostController::class)->except(['show']);
 });
+
+Route::post('/editor/upload', [EditorUploadController::class, 'upload'])->name('upload-file');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
