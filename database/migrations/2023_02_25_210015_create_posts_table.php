@@ -16,9 +16,12 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug');
-            $table->string('image');
-            $table->string('content');
+            $table->string('banner');
+            $table->longText('content');
+            $table->foreignId('user_id')
+                    ->constrained()
+                    ->onUpdate('CASCADE')
+                    ->onDelete('CASCADE');
             $table->timestamps();
         });
     }
