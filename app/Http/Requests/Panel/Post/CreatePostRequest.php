@@ -27,7 +27,7 @@ class CreatePostRequest extends FormRequest
             'title' => ['required', 'max:255', 'string'],
             'categories' => ['required', 'array'],
             'categories.*' => ['required', 'string'],
-            'image' => ['required', 'image'],
+            'banner' => ['required', 'image'],
             'content' => ['required']
         ];
     }
