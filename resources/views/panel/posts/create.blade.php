@@ -32,7 +32,7 @@
                         <p class="error">{{ $message }}</p>
                     @enderror
 
-                    {{-- file --}}
+                    {{-- banner --}}
                     <div class="file-upload">
                         <div class="i-file-upload">
                             <span>آپلود بنر دوره</span>
