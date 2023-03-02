@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Panel\CategoryController;
+use App\Http\Controllers\Panel\CommentController;
 use App\Http\Controllers\Panel\UserController;
 use App\Http\Controllers\Panel\PostController;
 use App\Http\Controllers\Panel\EditorUploadController;
@@ -25,6 +26,8 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth', 'IsAdmin'])->prefix('/panel')->group(function () {
     Route::resource('/users', UserController::class)->except(['show']);
     Route::resource('/categories', CategoryController::class)->except(['show', 'create']);
+    Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');
+    Route::get('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 });
 
 Route::middleware(['auth', 'IsAuthor'])->prefix('/panel')->group(function () {
