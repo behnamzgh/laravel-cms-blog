@@ -17,12 +17,12 @@
         </div>
         <div class="bg-white padding-20">
             <div class="t-header-search">
-                <form action="" onclick="event.preventDefault();">
+                <form action="{{route('posts.index')}}">
                     <div class="t-header-searchbox font-size-13">
                         <div type="text" class="text search-input__box font-size-13">جستجوی مقاله
                             <div class="t-header-search-content ">
-                                <input type="text" class="text" placeholder="نام مقاله">
-                                <btutton class="btn btn-webamooz_net">جستجو</btutton>
+                                <input type="text" name="search" class="text" placeholder="نام مقاله">
+                                <button class="btn btn-webamooz_net">جستجو</button>
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,10 @@
                     </tbody>
                 @endforeach
             </table>
-            {{ $posts->links() }}
+            {{-- baraye namayesh pagination ama vaghti search konim dar safahate badi paginate --}}
+            {{-- keyword search shode ro nemiare k bayad inja ba estefade az tabe append  --}}
+            {{-- query k search shode ro b tamame safahat ezafe mikone --}}
+            {{ $posts->appends(request()->query())->links() }}
         </div>
     </div>
     <x-slot name="scripts">
