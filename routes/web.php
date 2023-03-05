@@ -27,6 +27,7 @@ Route::middleware(['auth', 'IsAdmin'])->prefix('/panel')->group(function () {
     Route::resource('/users', UserController::class)->except(['show']);
     Route::resource('/categories', CategoryController::class)->except(['show', 'create']);
     Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');
+    Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
     Route::get('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 });
 
