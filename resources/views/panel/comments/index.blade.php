@@ -1,7 +1,7 @@
 <x-panel-layout>
-<x-slot name="title">
-    - مدیریت نظرات
-</x-slot>
+    <x-slot name="title">
+        - مدیریت نظرات
+    </x-slot>
     <div class="breadcrumb">
         <ul>
             <li><a href="index.html">پیشخوان</a></li>
@@ -32,41 +32,26 @@
                         <th>عملیات</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr role="row">
-                        <td><a href="">1</a></td>
-                        <td><a href="">محمد نیکو</a></td>
-                        <td><a href=""> لاراول</a></td>
-                        <td>دوره خوبی بود</td>
-                        <td>1399/05/01</td>
-                        <td>13</td>
-                        <td class="text-success">تاییده شده</td>
-                        <td>
-                            <a href="" class="item-delete mlg-15" title="حذف"></a>
-                            <a href="show-comment.html" class="item-reject mlg-15" title="رد"></a>
-                            <a href="show-comment.html" target="_blank" class="item-eye mlg-15" title="مشاهده"></a>
-                            <a href="show-comment.html" class="item-confirm mlg-15" title="تایید"></a>
-                            <a href="edit-comment.html" class="item-edit " title="ویرایش"></a>
-                        </td>
-                    </tr>
-                    <tr role="row">
-                        <td><a href="">1</a></td>
-                        <td><a href="">محمد نیکو</a></td>
-                        <td><a href="">دوره لاراول</a></td>
-                        <td>دوره خوبی بود</td>
-                        <td>1399/05/01</td>
-                        <td>13</td>
-                        <td class="text-error">تاییده نشده</td>
-                        <td>
-                            <a href="" class="item-delete mlg-15" title="حذف"></a>
-                            <a href="show-comment.html" class="item-reject mlg-15" title="رد"></a>
-                            <a href="show-comment.html" target="_blank" class="item-eye mlg-15" title="مشاهده"></a>
-                            <a href="show-comment.html" class="item-confirm mlg-15" title="تایید"></a>
-                            <a href="edit-comment.html" class="item-edit " title="ویرایش"></a>
-                        </td>
-                    </tr>
-
-                </tbody>
+                @foreach ($comments as $comment)
+                    <tbody>
+                        <tr role="row">
+                            <td>{{ $comment->id }}</td>
+                            <td>{{ $comment->user->name }}</td>
+                            <td>{{ $comment->post->title }}</td>
+                            <td>{{ $comment->content }}</td>
+                            <td>{{ $comment->jalali_created_at() }}</td>
+                            <td>{{ $comment->replies_count }}</td>
+                            <td class="{{ $comment->status ? 'text-success' : 'text-error' }}">{{ $comment->get_status()}}</td>
+                            <td>
+                                <a href="" class="item-delete mlg-15" title="حذف"></a>
+                                <a href="show-comment.html" class="item-reject mlg-15" title="رد"></a>
+                                <a href="show-comment.html" target="_blank" class="item-eye mlg-15" title="مشاهده"></a>
+                                <a href="show-comment.html" class="item-confirm mlg-15" title="تایید"></a>
+                                <a href="edit-comment.html" class="item-edit " title="ویرایش"></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                @endforeach
             </table>
         </div>
     </div>
