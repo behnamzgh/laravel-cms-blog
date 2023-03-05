@@ -4,16 +4,17 @@
     </x-slot>
     <div class="breadcrumb">
         <ul>
-            <li><a href="index.html">پیشخوان</a></li>
-            <li><a href="comments.html" class="is-active">نظرات</a></li>
+            <li><a href="{{ route('dashboard') }}">پیشخوان</a></li>
+            <li><a href="{{ route('comments.index') }}" class="is-active">نظرات</a></li>
         </ul>
     </div>
     <div class="main-content">
         <div class="tab__box">
             <div class="tab__items">
-                <a class="tab__item is-active" href="comments.html"> همه نظرات</a>
-                <a class="tab__item " href="comments.html">نظرات تاییده نشده</a>
-                <a class="tab__item " href="comments.html">نظرات تاییده شده</a>
+                <a class="tab__item is-active" href="{{ route('comments.index') }}"> همه نظرات</a>
+                {{-- in parametr ro hamrah route ersal mikonim b controller --}}
+                <a class="tab__item is-active" href="{{ route('comments.index', ['approved' => 0]) }}">نظرات تاییده نشده</a>
+                <a class="tab__item is-active" href="{{ route('comments.index', ['approved' => 1]) }}">نظرات تاییده شده</a>
             </div>
         </div>
 
