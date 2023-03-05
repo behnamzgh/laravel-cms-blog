@@ -14,8 +14,20 @@ class CommentController extends Controller
         return \view('panel.comments.index', \compact('comments'));
     }
 
+    public function update(Comment $comment)
+    {
+        $comment->update([
+            'status' => ! $comment->status
+        ]);
+
+        \session()->flash('status', 'وضعیت نمایش نظر تغییر کرد');
+        return \back();
+    }
+
     public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
+        \session()->flash('status', 'نظر به درستی حذف شد');
+        return \back();
     }
 }
