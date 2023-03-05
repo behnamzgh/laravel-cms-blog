@@ -8,9 +8,14 @@ use App\Http\Controllers\Controller;
 
 class CommentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $comments = Comment::with(['user','post'])->withCount('replies')->paginate();
+        if(isset($request->approved)){
+            // faghat on comment haii k parametri k az url ba route ersal shode yani approved to where zir barabar bashe ba status to DB ro namayesh mide
+            $comments = Comment::where('status', $request->approved)->with(['user','post'])->withCount('replies')->paginate();
+        }else{
+            $comments = Comment::with(['user','post'])->withCount('replies')->paginate();
+        }
         return \view('panel.comments.index', \compact('comments'));
     }
 
