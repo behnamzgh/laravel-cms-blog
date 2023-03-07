@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Panel\CategoryController;
 use App\Http\Controllers\Panel\CommentController;
+use App\Http\Controllers\Panel\DashboardController;
 use App\Http\Controllers\Panel\UserController;
 use App\Http\Controllers\Panel\PostController;
 use App\Http\Controllers\Panel\EditorUploadController;
@@ -18,11 +19,10 @@ Route::get('/post/{id}', function () {
     return view('post');
 })->name('post.show');
 
-Route::middleware('auth')->get('/profile', [PanelProfileController::class, 'index'])->name('profile');
+Route::middleware('auth')->get('/profile', [PanelProfileController::class, 'index'])->name('profile.index');
+Route::middleware('auth')->put('/profile', [PanelProfileController::class, 'update'])->name('profile.update');
 
-Route::get('/dashboard', function () {
-    return view('panel.index');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::middleware(['auth', 'IsAdmin'])->prefix('/panel')->group(function () {
     Route::resource('/users', UserController::class)->except(['show']);
