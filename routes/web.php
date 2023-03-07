@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\Panel\CategoryController;
 use App\Http\Controllers\Panel\CommentController;
 use App\Http\Controllers\Panel\DashboardController;
@@ -11,9 +12,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function () {
-    return view('landing');
-})->name('home');
+Route::get('/', [LandingController::class, 'index'])->name('home');
 
 Route::get('/post/{id}', function () {
     return view('post');
