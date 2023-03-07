@@ -24,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'profile',
     ];
 
     /**
@@ -61,5 +62,11 @@ class User extends Authenticatable
     public function jalali_updated_at()
     {
         return verta($this->updated_at)->format('Y/m/d');
+    }
+
+    // function baraye namayesh url profile karbar
+    public function getProfileUrl()
+    {
+        return asset('images/users/' . $this->profile);
     }
 }
