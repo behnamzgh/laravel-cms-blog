@@ -58,7 +58,7 @@
                                         <a href="{{ route('dashboard') }}">داشبورد</a>
                                     </li>
                                     <li class="option selected" data-value="0" data-display-text="" tabindex="0">
-                                        <a href="{{ route('karbar') }}">پروفایل</a>
+                                        <a href="{{ route('profile.index') }}">پروفایل</a>
                                     </li>
                                     <li class="option" data-value="0" data-display-text="" tabindex="0" id=""
                                         onclick="logoutUser()">
