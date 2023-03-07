@@ -26,6 +26,12 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
+    // function namayesh banner post ha
+    public function getPostBannerUrl()
+    {
+        return asset('/images/banners/' . $this->banner);
+    }
+
     // function tabdil tarikh miladi b jalali
     public function jalali_created_at()
     {
