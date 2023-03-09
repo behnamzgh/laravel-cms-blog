@@ -23,6 +23,7 @@
             <table class="table">
                 <thead role="rowgroup">
                     <tr role="row" class="title-row">
+                        <th>شماره</th>
                         <th>شناسه</th>
                         <th>ارسال کننده</th>
                         <th>برای</th>
@@ -36,6 +37,7 @@
                 @foreach ($comments as $comment)
                     <tbody>
                         <tr role="row">
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $comment->id }}</td>
                             <td>{{ $comment->user->name }}</td>
                             <td>{{ $comment->post->title }}</td>
@@ -52,7 +54,7 @@
                                 <a href="" onclick="updateComment(event, {{ $comment->id }})" class="item-confirm mlg-15" title="تایید"></a>
                                 @endif
 
-                                <a href="show-comment.html" target="_blank" class="item-eye mlg-15" title="مشاهده"></a>
+                                <a href="{{ route('post.show', $comment->post->id) }}" target="_blank" class="item-eye mlg-15" title="مشاهده"></a>
 
                                 <a href="" class="item-delete mlg-15" onclick="deleteComment(event, {{ $comment->id }})" title="حذف"></a>
 
@@ -72,6 +74,11 @@
                     </tbody>
                 @endforeach
             </table>
+
+            {{-- baraye inke moghe daste bandi approved=0 or approved=1 to pagination safahate dg ham neshon bde status ro --}}
+            {{ $comments->appends(request()->query())->links() }}
+
+
         </div>
     </div>
     <x-slot name="scripts">
