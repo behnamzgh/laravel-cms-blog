@@ -7,7 +7,7 @@
             <div class="articles">
                 @foreach($posts as $post)
                 <div class="articles__item">
-                    <a href="{{route('post.show', $post->id)}}" class="articles__link">
+                    <a href="{{ route('post.show', $post->id) }}" class="articles__link">
                         <div class="articles__img">
                             <img src="{{ $post->getPostBannerUrl() }}" class="articles__img-src">
                         </div>
