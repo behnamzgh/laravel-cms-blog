@@ -10,7 +10,8 @@ class ShowPostController extends Controller
     public function index(Post $post)
     {
         $post->load(['user','categories','comments' => function($query){
-            return $query->where('comment_id', null);
+            // query baraye vaghti ham comment zir majmoe nabod(comment_id null bod) va vaziatesh ham taeed shode bod
+            return $query->where('comment_id', null)->where('status', true);
         }])->loadCount('comments');
 
         // \dd($post->toArray());
