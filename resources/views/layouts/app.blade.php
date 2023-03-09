@@ -39,7 +39,8 @@
                     @guest
                         <div class="c-button__login-regsiter">
                             <div><a class="c-button__link c-button--login " href="{{ route('login') }}">ورود</a></div>
-                            <div><a class="c-button__link c-button--register" href="{{ route('register.show') }}">ثبت نام</a>
+                            <div><a class="c-button__link c-button--register" href="{{ route('register.show') }}">ثبت
+                                    نام</a>
                             </div>
                         </div>
                     @else
@@ -52,8 +53,10 @@
                                     <li class="option selected" data-value="0" data-display-text="" tabindex="0">
                                         <a href="{{ route('dashboard') }}">داشبورد</a>
                                     </li>
-                                    <li class="option selected" data-value="0" data-display-text="" tabindex="0"><a href="{{ route('profile.index') }}">پروفایل</a></li>
-                                    <li class="option" data-value="0" data-display-text="" tabindex="0" id="" onclick="logoutUser()">خروج</li>
+                                    <li class="option selected" data-value="0" data-display-text="" tabindex="0"><a
+                                            href="{{ route('profile.index') }}">پروفایل</a></li>
+                                    <li class="option" data-value="0" data-display-text="" tabindex="0" id=""
+                                        onclick="logoutUser()">خروج</li>
                                     </ul>
                                     <form action="{{ route('logout') }}" method="POST" id="logout-form">
                                         @csrf
@@ -67,10 +70,10 @@
         </div>
         <nav class="nav" id="nav">
             @guest
-            <div class="c-button__login-regsiter d-none">
-                <div><a class="c-button__link c-button--login" href="{{ route('login') }}">ورود</a></div>
-                <div><a class="c-button__link c-button--register" href="{{ route('register.show') }}">ثبت نام</a></div>
-            </div>
+                <div class="c-button__login-regsiter d-none">
+                    <div><a class="c-button__link c-button--login" href="{{ route('login') }}">ورود</a></div>
+                    <div><a class="c-button__link c-button--register" href="{{ route('register.show') }}">ثبت نام</a></div>
+                </div>
             @endguest
             <div class="container container--nav">
                 <ul class="nav__ul">
@@ -78,7 +81,8 @@
                     {{-- etellati k az tarafe provider inja load shode ro halghe mizanim baraye namayesh --}}
                     {{-- halghe aval baraye namayesh parent ha --}}
                     @foreach ($categories as $category)
-                        <li class="nav__item nav__item--has-sub"><a href="#" class="nav__link">{{ $category->name }}</a>
+                        <li class="nav__item nav__item--has-sub"><a href="#"
+                                class="nav__link">{{ $category->name }}</a>
                             <div class="nav__sub">
                                 <div class="container d-flex item-center flex-wrap container--nav">
                                     {{-- halghe dovom baraye children ha --}}
@@ -113,7 +117,8 @@
             <div class="footer__hr"></div>
             <div class="footer__about">
                 <p class="footer__txt">
-                    as long as you are willing to focus on your goals, and committed to whatever is necessary to achieve them, you are going to be successful. just a matter of TIME
+                    as long as you are willing to focus on your goals, and committed to whatever is necessary to achieve
+                    them, you are going to be successful. just a matter of TIME
                 </p>
             </div>
         </div>
@@ -124,8 +129,24 @@
         </div>
     </footer>
     <div class="overlay"></div>
+
+    {{-- sweetalert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{-- if baraye inke agar sessioni vojod dasht in tike ejra beshe baraye namayesh payam --}}
+    @if (Session::has('status'))
+        <script>
+            Swal.fire({
+                // title: 'همه چی مرتبه...',
+                text: '{{ session('status') }}',
+                icon: 'success',
+                confirmButtonText: 'تایید'
+            })
+        </script>
+    @endif
+
     <script src="{{ asset('/blog/js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ asset('/blog/js/js.js') }}"></script>
+
     <script>
         function userToggleDropdown() {
             document.getElementById('bazo-baste').classList.toggle('open');
@@ -135,8 +156,8 @@
             document.getElementById('logout-form').submit();
         }
     </script>
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/js/swiper.min.js"></script>-->
 
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/js/swiper.min.js"></script>-->
 </body>
 
 </html>
