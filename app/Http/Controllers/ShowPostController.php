@@ -7,9 +7,10 @@ use App\Models\Post;
 
 class ShowPostController extends Controller
 {
-    public function index(Request $request, Post $post)
+    public function index(Post $post)
     {
-        $post = Post::find($request->id);
+        // \dd($post->id);
+        // $post = Post::find($request->id);
         return \view('post', \compact('post'));
     }
 }
