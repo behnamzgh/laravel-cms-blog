@@ -9,8 +9,11 @@ class ShowPostController extends Controller
 {
     public function index(Post $post)
     {
-        // \dd($post->id);
-        // $post = Post::find($request->id);
+        $post->load(['user','categories','comments' => function($query){
+            return $query->where('comment_id', null);
+        }])->loadCount('comments');
+
+        // \dd($post->toArray());
         return \view('post', \compact('post'));
     }
 }
