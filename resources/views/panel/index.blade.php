@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <div class="row no-gutters">
+        {{-- <div class="row no-gutters">
             <div class="col-6 margin-left-10 margin-bottom-20">
                 <p class="box__title">درحال یادگیری</p>
                 <div class="table__box">
@@ -81,7 +81,7 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
     </div>
 </x-panel-layout>
