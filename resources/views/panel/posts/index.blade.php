@@ -35,6 +35,7 @@
 
                 <thead role="rowgroup">
                     <tr role="row" class="title-row">
+                        <th>شماره</th>
                         <th>شناسه</th>
                         <th>عنوان</th>
                         <th>نویسنده</th>
@@ -46,6 +47,7 @@
                 @foreach ($posts as $post)
                     <tbody>
                         <tr role="row" class="">
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $post->id }}</td>
                             <td>{{ $post->title }}</td>
                             <td>{{ $post->user->name }}</td>
@@ -53,7 +55,7 @@
                             <td>{{ $post->jalali_updated_at() }}</td>
                             <td>
                                 <a href="" onclick="deletePost(event, {{ $post->id }})" class="item-delete mlg-15" title="حذف"></a>
-                                <a href="" target="_blank" class="item-eye mlg-15" title="مشاهده"></a>
+                                <a href="{{ route('post.show', $post->id) }}" target="_blank" class="item-eye mlg-15" title="مشاهده"></a>
                                 <a href="{{ route('posts.edit', $post->id) }}" class="item-edit" title="ویرایش"></a>
                                 <form action="{{ route('posts.destroy', $post->id) }}" method="post" id="delete-post-{{ $post->id }}">
                                     @csrf
