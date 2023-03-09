@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0;">
     <title>داشبورد {{ $title ?? '' }}</title>
+    {{ $links ?? '' }}
+    <link rel="stylesheet" href="{{ asset('blog/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('blog/panel/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('blog/panel/css/responsive_991.css') }}" media="(max-width:991px)">
     <link rel="stylesheet" href="{{ asset('blog/panel/css/responsive_768.css') }}" media="(max-width:768px)">
     <link rel="stylesheet" href="{{ asset('blog/panel/css/font.css') }}">
-    {{ $links ?? '' }}
 </head>
 
 <body>
@@ -69,7 +70,7 @@
     @if (Session::has('status'))
         <script>
             Swal.fire({
-                title: 'همه چی مرتبه...',
+                // title: 'همه چی مرتبه...',
                 text: '{{ session('status') }}',
                 icon: 'success',
                 confirmButtonText: 'تایید'
