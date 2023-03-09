@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LandingController::class, 'index'])->name('home');
 
-Route::get('/post/{id}', [ShowPostController::class, 'index'])->name('post.show');
+Route::get('/post/{post}', [ShowPostController::class, 'index'])->name('post.show');
 
 Route::middleware('auth')->get('/profile', [PanelProfileController::class, 'index'])->name('profile.index');
 Route::middleware('auth')->put('/profile', [PanelProfileController::class, 'update'])->name('profile.update');
