@@ -14,7 +14,7 @@ class Comment extends Model
 
     // inja migim baraye har commenti k darim biad replies hash ham load kone baraye namayesh
     // comment haye to dar to zire har post
-    protected $with = ['replies'];
+    protected $with = ['approvedReplies'];
 
     // relation baraye namayesh etellate nevisande user
     public function user()
@@ -32,6 +32,11 @@ class Comment extends Model
     public function replies()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function approvedReplies()
+    {
+        return $this->replies()->where('status', true);
     }
 
     public function get_status()
