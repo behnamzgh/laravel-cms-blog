@@ -26,6 +26,11 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     // function namayesh banner post ha
     public function getPostBannerUrl()
     {
