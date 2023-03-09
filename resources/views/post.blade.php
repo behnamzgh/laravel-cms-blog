@@ -49,6 +49,7 @@
                         <form action="{{ route('comment.store') }}" method="post">
                             @csrf
                             <input type="hidden" name="post_id" value="{{ $post->id }}">
+                            <input type="hidden" name="comment_id" value="" id="reply-input">
                             <textarea class="comments__textarea" name="content" placeholder="بنویسید"></textarea>
                             <button class="btn btn--blue btn--shadow-blue">ارسال نظر</button>
                             <button class="btn btn--red btn--shadow-red">انصراف</button>
@@ -65,4 +66,13 @@
             </div>
         </div>
     </main>
+
+    <x-slot name="scripts">
+        <script>
+            function setReplyValue(id) {
+                document.getElementById('reply-input').value = id;
+            }
+        </script>
+    </x-slot>
+
 </x-app-layout>
