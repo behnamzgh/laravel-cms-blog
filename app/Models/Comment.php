@@ -12,6 +12,10 @@ class Comment extends Model
         'id'
     ];
 
+    // inja migim baraye har commenti k darim biad replies hash ham load kone baraye namayesh
+    // comment haye to dar to zire har post
+    protected $with = ['replies'];
+
     // relation baraye namayesh etellate nevisande user
     public function user()
     {
