@@ -14,14 +14,15 @@
                             <span class="comments_date">{{ $comment->created_at->diffForHumans() }}</span>
                         </div>
                     </div>
-                    <a href="#comments" class="btn btn--blue btn--shadow-blue btn--comments-reply">ارسال پاسخ</a>
+                    <a href="#comments" class="btn btn--blue btn--shadow-blue btn--comments-reply" onclick="setReplyValue({{ $comment->id }})">ارسال پاسخ</a>
                 </div>
             </div>
             <p class="comments__body">
                 {{ $comment->content }}
             </p>
         </div>
-        @if ($comment->replies->count() > 0)
+        {{-- agar comment reply taeed shode dasht in ghesmat rosh halghe bzane va etellate reply ro pass bde b comments.comment --}}
+        @if ($comment->approvedReplies->count() > 0)
             <div class="comments__subset">
                 @foreach ($comment->replies as $reply)
                     @include('comments.comment', ['comment' => $reply])
