@@ -3,6 +3,7 @@
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\Panel\CategoryController;
 use App\Http\Controllers\Panel\CommentController;
+use App\Http\Controllers\CommentController as StoreCommentController;
 use App\Http\Controllers\Panel\DashboardController;
 use App\Http\Controllers\Panel\UserController;
 use App\Http\Controllers\Panel\PostController;
@@ -14,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [LandingController::class, 'index'])->name('home');
-
 Route::get('/post/{post}', [ShowPostController::class, 'index'])->name('post.show');
+Route::post('/comment', [StoreCommentController::class, 'store'])->name('comment.store');
 
 Route::middleware('auth')->get('/profile', [PanelProfileController::class, 'index'])->name('profile.index');
 Route::middleware('auth')->put('/profile', [PanelProfileController::class, 'update'])->name('profile.update');
