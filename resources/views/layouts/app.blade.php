@@ -80,19 +80,20 @@
                     <li class="nav__item"><a href="{{ route('home') }}" class="nav__link">صفحه اصلی</a></li>
                     {{-- etellati k az tarafe provider inja load shode ro halghe mizanim baraye namayesh --}}
                     {{-- halghe aval baraye namayesh parent ha --}}
-                    @foreach ($categories as $category)
-                        <li class="nav__item nav__item--has-sub"><a href="#"
-                                class="nav__link">{{ $category->name }}</a>
+                    @forelse ($categories as $category)
+                        <li class="nav__item nav__item--has-sub"><a href="{{ route('category.show', $category->id) }}" class="nav__link">{{ $category->name }}</a>
                             <div class="nav__sub">
                                 <div class="container d-flex item-center flex-wrap container--nav">
                                     {{-- halghe dovom baraye children ha --}}
                                     @foreach ($category->children as $childCategory)
-                                        <a href="" class="nav__link">{{ $childCategory->name }}</a>
+                                        <a href="{{ route('category.show', $childCategory->id) }}" class="nav__link">{{ $childCategory->name }}</a>
                                     @endforeach
                                 </div>
                             </div>
                         </li>
-                    @endforeach
+                    @empty
+                        <p>چیزی برای دسته بندی مدنظر یافت نشد</p>
+                    @endforelse
                     <li class="nav__item"><a href="#" class="nav__link">درباره ما</a></li>
                     <li class="nav__item"><a href="#" class="nav__link">تماس باما</a></li>
                 </ul>
