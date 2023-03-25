@@ -10,6 +10,7 @@ use App\Http\Controllers\Panel\PostController;
 use App\Http\Controllers\Panel\EditorUploadController;
 use App\Http\Controllers\Panel\ProfileController as PanelProfileController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchPostController;
 use App\Http\Controllers\ShowPostCategoryController;
 use App\Http\Controllers\ShowPostController;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LandingController::class, 'index'])->name('home');
 Route::get('/post/{post}', [ShowPostController::class, 'index'])->name('post.show');
+Route::get('/search', [SearchPostController::class, 'show'])->name('post.search');
 Route::get('/category/{category}', [ShowPostCategoryController::class, 'show'])->name('category.show');
 Route::post('/comment', [StoreCommentController::class, 'store'])->name('comment.store');
 
