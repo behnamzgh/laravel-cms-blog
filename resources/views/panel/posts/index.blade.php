@@ -17,7 +17,7 @@
         </div>
         <div class="bg-white padding-20">
             <div class="t-header-search">
-                <form action="{{route('posts.index')}}">
+                <form action="{{ route('posts.index') }}">
                     <div class="t-header-searchbox font-size-13">
                         <div type="text" class="text search-input__box font-size-13">جستجوی مقاله
                             <div class="t-header-search-content ">
@@ -57,10 +57,11 @@
                                 <a href="" onclick="deletePost(event, {{ $post->id }})" class="item-delete mlg-15" title="حذف"></a>
                                 <a href="{{ route('post.show', $post->id) }}" target="_blank" class="item-eye mlg-15" title="مشاهده"></a>
                                 <a href="{{ route('posts.edit', $post->id) }}" class="item-edit" title="ویرایش"></a>
-                                <form action="{{ route('posts.destroy', $post->id) }}" method="post" id="delete-post-{{ $post->id }}">
-                                    @csrf
-                                    @method('delete')
-                                </form>
+                            <form action="{{ route('posts.destroy', $post->id) }}" method="post"
+                                id="delete-post-{{ $post->id }}">
+                                @csrf
+                                @method('delete')
+                            </form>
                             </td>
                         </tr>
                     </tbody>
@@ -74,7 +75,7 @@
     </div>
     <x-slot name="scripts">
         <script>
-            function deletePost(event, id){
+            function deletePost(event, id) {
                 event.preventDefault();
                 Swal.fire({
                     title: 'آیا مطمئن هستید؟',
