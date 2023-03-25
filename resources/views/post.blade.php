@@ -30,8 +30,7 @@
                 <div class="single-page__tags">
                     <ul class="single-page__tags-ul">
                         @foreach ($post->categories as $category)
-                            <li class="single-page__tags-li"><a href=""
-                                    class="single-page__tags-link">{{ $category->name }}</a></li>
+                            <li class="single-page__tags-li"><a href="{{ route('category.show', $category->id) }}" class="single-page__tags-link">{{ $category->name }}</a></li>
                         @endforeach
                     </ul>
                 </div>
