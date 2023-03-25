@@ -24,7 +24,7 @@
             </div>
         </article>
         <div class="pagination">
-            {{ $posts->links() }}
+            {{ $posts->appends(request()->query())->links() }}
         </div>
     </main>
 </x-app-layout>
