@@ -10,12 +10,14 @@ use App\Http\Controllers\Panel\PostController;
 use App\Http\Controllers\Panel\EditorUploadController;
 use App\Http\Controllers\Panel\ProfileController as PanelProfileController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ShowPostCategoryController;
 use App\Http\Controllers\ShowPostController;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [LandingController::class, 'index'])->name('home');
 Route::get('/post/{post}', [ShowPostController::class, 'index'])->name('post.show');
+Route::get('/category/{category}', [ShowPostCategoryController::class, 'show'])->name('category.show');
 Route::post('/comment', [StoreCommentController::class, 'store'])->name('comment.store');
 
 Route::middleware('auth')->get('/profile', [PanelProfileController::class, 'index'])->name('profile.index');
